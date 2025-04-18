@@ -1,0 +1,15 @@
+const { Builder, By, until } = require('selenium-webdriver');
+const assert = require('assert');
+
+describe('Google Search Test', function () {
+  let driver;
+
+  it('Visit SauceDemo dan cek page title', async function () {
+    driver = await new Builder().forBrowser('chrome').build();
+
+    await driver.get('https://www.saucedemo.com');
+
+    await driver.sleep(3000);
+    await driver.quit();
+  });
+});
