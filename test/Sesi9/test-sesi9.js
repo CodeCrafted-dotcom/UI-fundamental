@@ -5,10 +5,18 @@ const chrome = require('selenium-webdriver/chrome');
 describe('Google Search Test', function () {
   let driver;
 
-    it('Visit SauceDemo dan cek page title', async function () {
+  beforeEach(async function () {
+    // //driver = await new Builder().forBrowser('chrome').build();
+    // console.log("ini nge print di dalam hook")
+    driver = await new Builder().forBrowser('chrome').build();
+    });
+
+    it('Visit SauceDemo pake chrome dan cek page title', async function () {
         options = new chrome.Options();
+        // options.addArguments("--headless");
         driver = await new Builder().forBrowser('chrome').build();
-        
+        // driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
+
         await driver.get('https://www.saucedemo.com');
         const title = await driver.getTitle();
 
@@ -28,33 +36,75 @@ describe('Google Search Test', function () {
         await driver.wait(until.elementIsVisible(buttonCart), 5000, 'shopping cart harus tampil');
 
         await buttonCart.isDisplayed()
+
+        //await driver.sleep(3000);
+        
     });
 
-    it('Urutkan Produk dari Z ke A', async function () {
-    // Pastikan halaman produk sudah terbuka
-    await driver.wait(until.elementLocated(By.className('inventory_list')), 10000);
+    it('Visit SauceDemo pake chrome dan cek page title', async function () {
+      options = new chrome.Options();
+      //options.addArguments("--headless");
+      
+      //driver = await new Builder().forBrowser('firefox').setFirefoxOptions(options).build();
 
-    // Pilih opsi pengurutan dari Z ke A
-    let sortDropdown = await driver.findElement(By.css('[data-test="product_sort_container"]'));
-    await sortDropdown.click();
+      await driver.get('https://www.saucedemo.com');
+      const title = await driver.getTitle();
 
-    let zkea= await driver.findElement(By.css('option[value="za"]'));
-    await zkea.findElement(By.css('option[value="za"]')).click();
+      // assert.strictEqual(title, 'Swag Labs');
 
-    // // Ambil nama produk setelah diurutkan
-    // let productNames = await driver.findElements(By.className('inventory_item_name'));
-    // let productTexts = [];
-    // for (let product of productNames) {
-    //   productTexts.push(await product.getText());
-    // }
+      // let inputUsername = await driver.findElement(By.css('[data-test="username"]'));
+      // let inputPassword = await driver.findElement(By.xpath('//*[@data-test="password"]'));
+      // let buttonLogin = await driver.findElement(By.className('submit-button btn_action'));
 
-    // Verifikasi bahwa produk diurutkan dari Z ke A
-    let sortedProducts = [...productTexts].sort((a, b) => b.localeCompare(a));
-    assert.deepStrictEqual(productTexts, sortedProducts, 'Produk tidak diurutkan dari Z ke A');
+      // await inputUsername.sendKeys('standard_user');
+      // await inputPassword.sendKeys('secret_sauce');
+      // await buttonLogin.click();
 
-    await driver.sleep(3000);
-    await driver.quit();
-  });
+      // let buttonCart = await driver.wait(until.elementLocated(By.xpath('//*[@data-test="shopping-cart-link"]')),
+      // 10000
+      // );
+      // await driver.wait(until.elementIsVisible(buttonCart), 5000, 'shopping cart harus tampil');
+
+      // await buttonCart.isDisplayed()
+
+      //await driver.sleep(3000);
+      
+    });
+
+    it('Visit SauceDemo pakai chrome dan cek page title', async function (){
+      await driver.get('https://www.saucedemo.com/');
+      const title = await driver.getTitle();
+
+    });
+
+    afterEach(async function () {
+      await driver.quit()
+    });
+
+    // it('Urutkan Produk dari Z ke A', async function () {
+    // // Pastikan halaman produk sudah terbuka
+    //   await driver.wait(until.elementLocated(By.className('inventory_list')), 10000);
+
+    // // Pilih opsi pengurutan dari Z ke A
+    //   let sortDropdown = await driver.findElement(By.css('[data-test="product_sort_container"]'));
+    //   await sortDropdown.click();
+
+    //   let zkea= await driver.findElement(By.css('option[value="za"]'));
+    //   await zkea.findElement(By.css('option[value="za"]')).click();
+
+    // // // Ambil nama produk setelah diurutkan
+    // // let productNames = await driver.findElements(By.className('inventory_item_name'));
+    // // let productTexts = [];
+    // // for (let product of productNames) {
+    // //   productTexts.push(await product.getText());
+    // // }
+
+    // // Verifikasi bahwa produk diurutkan dari Z ke A
+    //   let sortedProducts = [...productTexts].sort((a, b) => b.localeCompare(a));
+    //   assert.deepStrictEqual(productTexts, sortedProducts, 'Produk tidak diurutkan dari Z ke A');
+
+    
+  //});
 
 //   it('Visit SauceDemo dan cek page title', async function () {
 //     options = new chrome.Options();
